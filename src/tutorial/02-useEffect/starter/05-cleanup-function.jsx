@@ -3,11 +3,15 @@ import { useEffect } from "react";
 function TestComponent() {
   useEffect(() => {
     // DOM event running in the background once it is set and as soon as it is triggered
-    setInterval(() => {
+    const myInterval = setInterval(() => {
       console.log("This is the test Component");
     }, 1000);
 
     // This is where we need a cleanup function because this is a memory leak
+
+    return () => {
+      clearInterval(myInterval);
+    };
   }, []);
   return <h1>Cleanup test</h1>;
 }
