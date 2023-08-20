@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
+
 function TestComponent() {
+  /**  --- This is example one 
   useEffect(() => {
     // DOM event running in the background once it is set and as soon as it is triggered
     const myInterval = setInterval(() => {
@@ -13,6 +15,22 @@ function TestComponent() {
       clearInterval(myInterval);
     };
   }, []);
+
+  --*/
+
+  useEffect(() => {
+    const someFunc = () => {
+      // Some Logic
+    };
+
+    window.addEventListener("scroll", someFunc);
+
+    // this is a cleanup function. Everytime the Component is unMounted, we want to remove the event-handler
+    return () => {
+      window.removeEventListener("scroll", someFunc);
+    };
+  });
+
   return <h1>Cleanup test</h1>;
 }
 
