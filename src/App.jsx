@@ -1,4 +1,4 @@
-import Starter from "./tutorial/02-useEffect/starter/05-cleanup-function";
+import Starter from "./tutorial/09-context-api/starter/Navbar";
 
 function App() {
   return (
