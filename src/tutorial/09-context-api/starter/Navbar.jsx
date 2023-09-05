@@ -1,8 +1,11 @@
 import React, { createContext } from "react";
 import NavLinks from "./NavLinks";
 import { useState } from "react";
+import { useContext } from "react";
 
 export const NavbarContext = createContext();
+
+export const useAppContext = () => useContext(NavbarContext);
 
 export default function Navbar() {
   const [user, setUser] = useState({
