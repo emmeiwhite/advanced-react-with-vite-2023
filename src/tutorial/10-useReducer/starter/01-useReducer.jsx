@@ -15,6 +15,13 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "RESET_LIST") {
+    return {
+      ...state,
+      people: data,
+    };
+  }
+
   return state;
 };
 
@@ -27,8 +34,12 @@ const ReducerBasics = () => {
     setPeople(newPeople);
   };
 
-  const handleReset = () => {
+  const clearList = () => {
     dispatch({ type: "CLEAR_LIST" });
+  };
+
+  const handleReset = () => {
+    dispatch({ type: "RESET_LIST" });
   };
 
   return (
@@ -46,13 +57,23 @@ const ReducerBasics = () => {
         );
       })}
 
-      <button
-        className="btn"
-        style={{ marginTop: "2rem" }}
-        onClick={handleReset}
-      >
-        clear items
-      </button>
+      {state.people.length > 1 ? (
+        <button
+          className="btn"
+          style={{ marginTop: "2rem" }}
+          onClick={clearList}
+        >
+          clear items
+        </button>
+      ) : (
+        <button
+          className="btn"
+          style={{ marginTop: "2rem" }}
+          onClick={handleReset}
+        >
+          Reset items
+        </button>
+      )}
     </div>
   );
 };
