@@ -22,6 +22,14 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === "DELETE_ITEM") {
+    let newPeople = state.people.filter((person) => person.id !== action.id);
+    return {
+      ...state,
+      people: newPeople,
+    };
+  }
+
   return state;
 };
 
@@ -30,8 +38,9 @@ const ReducerBasics = () => {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
   const removeItem = (id) => {
-    let newPeople = state.people.filter((person) => person.id !== id);
-    setPeople(newPeople);
+    dispatch({ type: "DELETE_ITEM", id });
+    // let newPeople = state.people.filter((person) => person.id !== id);
+    // setPeople(newPeople);
   };
 
   const clearList = () => {
