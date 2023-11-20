@@ -1,9 +1,6 @@
-import { useState } from "react";
-import { data } from "../../../data";
-
 const ErrorExample = () => {
   let count = 0;
-
+  // A normal variable
   return (
     <div>
       <p>Count: {count}</p>
