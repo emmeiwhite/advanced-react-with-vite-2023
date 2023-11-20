@@ -23,6 +23,8 @@ const UseStateGotcha = () => {
         // Now the number of times, we click on the button, the count value will be added accordingly
       });
     }, 3000);
+
+    // useState() is asynchronous
   };
   return (
     <div>

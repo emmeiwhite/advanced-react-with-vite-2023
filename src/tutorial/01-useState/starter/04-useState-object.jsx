@@ -23,7 +23,7 @@ const UseStateObject = () => {
   const handlePerson = () => {
     setPerson({
       ...person,
-      userName: "Rawdha",
+      userName: "Rawdha, Princess",
       age: 25,
       hobby: "Designing Clothing",
     });
@@ -34,6 +34,7 @@ const UseStateObject = () => {
       <p>{person.age}</p>
       <p>{person.hobby}</p>
 
+      {/*  */}
       <button
         className="btn"
         // onClick={handleStateValues}
