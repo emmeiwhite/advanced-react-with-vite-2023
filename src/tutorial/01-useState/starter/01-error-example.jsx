@@ -2,9 +2,20 @@ import { useState } from "react";
 import { data } from "../../../data";
 
 const ErrorExample = () => {
+  let count = 0;
+
   return (
     <div>
-      <h1>useState Error Example</h1>
+      <p>Count: {count}</p>
+      <button
+        onClick={() => {
+          count += 1;
+          console.log(count);
+        }}
+        className="btn"
+      >
+        Increase
+      </button>
     </div>
   );
 };
