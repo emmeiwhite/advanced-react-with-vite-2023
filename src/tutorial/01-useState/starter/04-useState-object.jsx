@@ -1,32 +1,26 @@
 import { useState } from "react";
 
 const UseStateObject = () => {
-  const [person, setPerson] = useState({
-    id: 1,
-    name: "Immu",
-    age: 31,
-    hobby: "Reading Books",
-  });
+  const [userName, setUserName] = useState("emmeiwhite");
+  const [age, setAge] = useState(20);
+  const [hobby, setHobby] = useState("reverse sawal");
 
-  const handleClick = () => {
-    setPerson({
-      id: 2,
-      name: "Tim David",
-      age: 32,
-      hobby: "Cricket",
-    });
+  const handleStateValues = () => {
+    setAge(32);
+    setUserName("Roufi");
+    setHobby("Time pass");
   };
   return (
     <div>
-      <h4>Name: {person.name}</h4>
-      <h4>Age: {person.age}</h4>
-      <h4>Hobby: {person.hobby}</h4>
+      <p>{userName}</p>
+      <p>{age}</p>
+      <p>{hobby}</p>
 
       <button
-        onClick={handleClick}
         className="btn"
+        onClick={handleStateValues}
       >
-        Update Person
+        Show John
       </button>
     </div>
   );
