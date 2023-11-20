@@ -1,45 +1,70 @@
-import { data } from "../../../data";
+import { people } from "./../../../data";
 import { useState } from "react";
+
 const UseStateArray = () => {
-  const [people, setPeople] = useState(data);
+  const [persons, setPersons] = useState(people);
 
-  const deleteItem = (id) => {
-    setPeople((prevPeople) => {
-      const updatedPeople = prevPeople.filter((person) => person.id !== id);
-      return updatedPeople;
+  // handlers is where we update state for re-renders not in the return
+  function clearAll() {
+    setPersons([]);
+  }
+
+  function reset() {
+    setPersons(people);
+  }
+
+  // delete currentItem
+  function handleDelete(id) {
+    setPersons((person) => {
+      return persons.filter((person) => person.id !== id);
     });
-  };
+  }
 
-  const deleteAll = () => {
-    setPeople([]);
-  };
   return (
     <>
-      <ul>
-        {people.map((person) => {
-          return (
-            <li key={person.id}>
-              <h4>{person.name}</h4>
-              <button
-                onClick={() => deleteItem(person.id)}
-                className="btn"
-              >
-                Delete
-              </button>
-            </li>
-          );
-        })}
+      <Persons
+        persons={persons}
+        deleteCurrent={handleDelete}
+      />
 
-        <p>--------------------------------------------</p>
-        <button
-          onClick={deleteAll}
-          className="btn"
-        >
-          Delete All
-        </button>
-      </ul>
+      <p></p>
+
+      <button
+        className="btn"
+        onClick={persons.length > 0 ? clearAll : reset}
+      >
+        {persons.length > 0 ? "Clear All" : "Reset"}
+      </button>
     </>
   );
 };
 
+function Persons({ persons, deleteCurrent }) {
+  return (
+    <div className="people-wrapper">
+      {persons.map((person) => (
+        <Person
+          person={person}
+          key={person.id}
+          deleteCurrent={deleteCurrent}
+        />
+      ))}
+    </div>
+  );
+}
+// Person Component
+function Person({ person, deleteCurrent }) {
+  return (
+    <div className="person">
+      <h2>Name: {person.name}</h2>
+      <p>{person?.nickName && `Nick name: ${person.nickName}`}</p>
+      <button
+        className="btn"
+        onClick={() => deleteCurrent(person.id)}
+      >
+        Delete
+      </button>
+    </div>
+  );
+}
 export default UseStateArray;
