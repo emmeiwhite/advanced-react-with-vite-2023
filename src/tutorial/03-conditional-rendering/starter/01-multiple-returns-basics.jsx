@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 const MultipleReturnsBasics = () => {
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(function () {
+  /** Now, we will mimic fetching data from an API */
+  useEffect(() => {
     setTimeout(() => {
-      // fetch data mimic
       setIsLoading(false);
-    }, 3000);
+    }, 4000);
   }, []);
 
   if (isLoading) {
