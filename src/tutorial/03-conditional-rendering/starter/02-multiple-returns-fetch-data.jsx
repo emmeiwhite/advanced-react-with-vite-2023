@@ -1,49 +1,24 @@
 import { useEffect, useState } from "react";
-const url = "https://api.github.com/users/QuincyLarsons";
+const url = "https://api.github.com/users/QuincyLarson";
 
 const MultipleReturnsFetchData = () => {
+  /** In this challenge, I want to get the github user from an API */
   const [isLoading, setIsLoading] = useState(true);
   const [person, setPerson] = useState(null);
-  const [isError, setIsError] = useState(false);
 
-  useEffect(function () {
-    async function fetchData() {
-      try {
-        const response = await fetch(url);
-        const res = await response.json();
+  const fetchUser = async () => {
+    const response = await fetch(url);
+    const user = await response.json();
+    console.log(user);
+  };
 
-        if (!res.ok) {
-          setIsError(true);
-          setIsLoading(false);
-          throw new Error("404 Error!");
-        }
-        setIsLoading(false);
-        setPerson(res);
-      } catch {
-        setIsLoading(false);
-        setIsError(true);
-      }
-    }
-
-    fetchData();
+  useEffect(() => {
+    fetchUser();
   }, []);
 
   if (isLoading) {
     return <h1>Loading ...</h1>;
   }
-
-  if (isError) {
-    return <h1>Error ...</h1>;
-  }
-
-  return (
-    <article>
-      <img
-        src={person.avatar_url}
-        alt={person.name}
-      />
-      <h2>{person.name}</h2>
-    </article>
-  );
+  return <article>I am a Component returning some JSX</article>;
 };
 export default MultipleReturnsFetchData;
