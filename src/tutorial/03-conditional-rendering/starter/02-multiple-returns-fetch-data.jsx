@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-const url = "https://api.github.com/users/QuincyLarson";
+const url = "https://api.github.com/users/emmeiwhite";
 
 const MultipleReturnsFetchData = () => {
   /** In this challenge, I want to get the github user from an API */
@@ -10,11 +10,17 @@ const MultipleReturnsFetchData = () => {
   const fetchUser = async () => {
     try {
       const response = await fetch(url);
+
+      // fetch gocha!
+      if (!response.ok) {
+        setError(true);
+        setIsLoading(false);
+        return; // we simply return in this case and our error state is true which will output the if(error) condition in the browser!
+      }
       const user = await response.json();
       console.log(user);
-
-      setIsLoading(false);
       setPerson(user);
+      setIsLoading(false);
     } catch (e) {
       setError(true);
       setIsLoading(false);
@@ -38,6 +44,22 @@ const MultipleReturnsFetchData = () => {
     return <h1>There was an error ...</h1>;
   }
 
-  return <article>I am a Component returning some JSX</article>;
+  const styles = {
+    width: "150px",
+    borderRadius: "100%",
+  };
+
+  return (
+    <article>
+      <img
+        src={person.avatar_url}
+        alt={person.login}
+        style={styles}
+      />
+      <h1>{person.name}</h1>
+      <h3>Works at {person.company}</h3>
+      <p>{person.bio}</p>
+    </article>
+  );
 };
 export default MultipleReturnsFetchData;
