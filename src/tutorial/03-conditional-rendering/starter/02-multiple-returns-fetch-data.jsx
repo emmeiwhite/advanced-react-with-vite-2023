@@ -15,7 +15,8 @@ const MultipleReturnsFetchData = () => {
       if (!response.ok) {
         setError(true);
         setIsLoading(false);
-        return; // we simply return in this case and our error state is true which will output the if(error) condition in the browser!
+        return;
+        // we simply return in this case and our error state is true which will output the if(error) condition in the browser!
       }
       const user = await response.json();
       console.log(user);

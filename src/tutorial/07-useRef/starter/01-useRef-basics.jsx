@@ -1,30 +1,59 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from "react";
 
 const UseRefBasics = () => {
-  const [value, setValue] = useState(0);
+  const [inputValue, setInputValue] = useState("");
+  const count = useRef(0);
+  const refContainer = useRef(null);
+
+  // useEffect(() => {
+  //   count.current = count.current + 1;
+  //   console.log(refContainer);
+  // });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const inputValue = refContainer.current.value;
+    setInputValue("test");
+    console.log(inputValue);
+  };
+
+  const styles = {
+    padding: "2rem",
+    backgroundColor: "whitesmoke",
   };
 
   return (
-    <div>
-      <form className='form' onSubmit={handleSubmit}>
-        <div className='form-row'>
-          <label htmlFor='name' className='form-label'>
-            Name
-          </label>
-          <input type='text' id='name' className='form-input' />
+    <>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <h1>Render Count: {count.current}</h1>
+
+      {/* useRef for uncontrolled input */}
+
+      <form
+        onSubmit={handleSubmit}
+        style={styles}
+      >
+        <div>
+          <input
+            type="text"
+            ref={refContainer}
+          />
         </div>
-        <button type='submit' className='btn btn-block'>
-          submit
+
+        <button
+          type="submit"
+          className="btn"
+        >
+          Submit
         </button>
       </form>
-      <h1>value : {value}</h1>
-      <button onClick={() => setValue(value + 1)} className='btn'>
-        increase
-      </button>
-    </div>
+
+      <h2>{refContainer.current?.value}</h2>
+    </>
   );
 };
 
