@@ -15,6 +15,7 @@ const useFetch = (url) => {
 
     const data = await response.json();
     setUser(data);
+    setLoading(false);
   };
 
   useEffect(() => {
