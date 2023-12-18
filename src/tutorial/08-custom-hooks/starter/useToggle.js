@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export default function useToggle(defaultValue) {
+const useToggle = (defaultValue) => {
   const [show, setShow] = useState(defaultValue);
-
   const toggle = () => {
-    setShow((prevShow) => !prevShow);
+    setShow((prev) => !prev);
   };
 
   return { show, toggle };
-}
+};
+export default useToggle;
