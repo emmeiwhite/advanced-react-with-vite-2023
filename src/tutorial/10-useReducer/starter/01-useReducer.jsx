@@ -24,6 +24,13 @@ const reducer = (state, action) => {
       users: data,
     };
   }
+
+  if (action.type === REMOVE_ITEM) {
+    return {
+      ...state,
+      users: state.users.filter((user) => user.id !== action.payload),
+    };
+  }
   // return state;
   throw new Error(`No matching "${action.type}" - ACTION TYPE`);
 };
@@ -36,6 +43,7 @@ function ReducerBasics() {
   // Delete individual | D of CRUD
   const handleRemove = (id) => {
     // setUsers(users.filter((user) => user.id !== id));
+    dispatch({ type: REMOVE_ITEM, payload: id });
   };
 
   // Remove All
