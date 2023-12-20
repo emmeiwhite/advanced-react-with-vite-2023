@@ -4,7 +4,12 @@ const List = ({ people }) => {
   return (
     <div>
       {people.map((person) => {
-        return <Person {...person} />;
+        return (
+          <Person
+            {...person}
+            key={person.id}
+          />
+        );
       })}
     </div>
   );

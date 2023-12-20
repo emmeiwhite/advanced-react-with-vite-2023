@@ -1,14 +1,15 @@
 import React, { useReducer, useState } from "react";
 import { data } from "../../../data";
+import { CLEAR_LIST, RESET_LIST, REMOVE_ITEM } from "./actions";
 
 const defaultState = {
   users: data,
   isLoading: false,
 };
 
-const CLEAR_LIST = "CLEAR_LIST";
-const RESET_LIST = "REST_LIST";
-const REMOVE_ITEM = "REMOVE_ITEM";
+// const CLEAR_LIST = "CLEAR_LIST";
+// const RESET_LIST = "REST_LIST";
+// const REMOVE_ITEM = "REMOVE_ITEM";
 
 const reducer = (state, action) => {
   if (action.type === CLEAR_LIST) {
@@ -28,7 +29,7 @@ const reducer = (state, action) => {
   if (action.type === REMOVE_ITEM) {
     return {
       ...state,
-      users: state.users.filter((user) => user.id !== action.payload),
+      users: state.users.filter((user) => user.id !== action.payload.id),
     };
   }
   // return state;
@@ -43,7 +44,7 @@ function ReducerBasics() {
   // Delete individual | D of CRUD
   const handleRemove = (id) => {
     // setUsers(users.filter((user) => user.id !== id));
-    dispatch({ type: REMOVE_ITEM, payload: id });
+    dispatch({ type: REMOVE_ITEM, payload: { id } });
   };
 
   // Remove All
