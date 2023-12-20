@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { data } from "../../../data";
 import { CLEAR_LIST, RESET_LIST, REMOVE_ITEM } from "./actions";
+import reducer from "./reducer";
 
 const defaultState = {
   users: data,
@@ -11,30 +12,30 @@ const defaultState = {
 // const RESET_LIST = "REST_LIST";
 // const REMOVE_ITEM = "REMOVE_ITEM";
 
-const reducer = (state, action) => {
-  if (action.type === CLEAR_LIST) {
-    return {
-      ...state,
-      users: [],
-    };
-  }
+// const reducer = (state, action) => {
+//   if (action.type === CLEAR_LIST) {
+//     return {
+//       ...state,
+//       users: [],
+//     };
+//   }
 
-  if (action.type === RESET_LIST) {
-    return {
-      ...state,
-      users: data,
-    };
-  }
+//   if (action.type === RESET_LIST) {
+//     return {
+//       ...state,
+//       users: data,
+//     };
+//   }
 
-  if (action.type === REMOVE_ITEM) {
-    return {
-      ...state,
-      users: state.users.filter((user) => user.id !== action.payload.id),
-    };
-  }
-  // return state;
-  throw new Error(`No matching "${action.type}" - ACTION TYPE`);
-};
+//   if (action.type === REMOVE_ITEM) {
+//     return {
+//       ...state,
+//       users: state.users.filter((user) => user.id !== action.payload.id),
+//     };
+//   }
+//   // return state;
+//   throw new Error(`No matching "${action.type}" - ACTION TYPE`);
+// };
 
 function ReducerBasics() {
   // const [users, setUsers] = useState(data);
