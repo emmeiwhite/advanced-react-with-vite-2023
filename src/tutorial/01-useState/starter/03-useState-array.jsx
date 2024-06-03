@@ -1,70 +1,55 @@
-import { people } from "./../../../data";
-import { useState } from "react";
+import { useState } from 'react'
+import { data } from './../../../data'
 
 const UseStateArray = () => {
-  const [persons, setPersons] = useState(people);
+  const [persons, setPersons] = useState(data)
+  console.log(persons)
 
-  // handlers is where we update state for re-renders not in the return
   function clearAll() {
-    setPersons([]);
+    setPersons([])
   }
 
-  function reset() {
-    setPersons(people);
+  function removePerson(id) {
+    const updatedPersons = persons.filter(person => person.id !== id)
+
+    setPersons(updatedPersons)
   }
 
-  // delete currentItem
-  function handleDelete(id) {
-    setPersons((person) => {
-      return persons.filter((person) => person.id !== id);
-    });
+  function renderList() {
+    return persons.map(({ id, name }) => {
+      return (
+        <div
+          key={id}
+          className="person"
+        >
+          <h4> {name}</h4>
+          <button
+            onClick={() => removePerson(id)}
+            className="btn"
+          >
+            remove item
+          </button>
+        </div>
+      )
+    })
   }
 
+  function resetList() {
+    setPersons(data)
+  }
   return (
     <>
-      <Persons
-        persons={persons}
-        deleteCurrent={handleDelete}
-      />
-
-      <p></p>
+      {renderList()}
+      <br />
 
       <button
         className="btn"
-        onClick={persons.length > 0 ? clearAll : reset}
+        onClick={persons.length > 0 ? clearAll : resetList}
       >
-        {persons.length > 0 ? "Clear All" : "Reset"}
+        {persons.length > 0 ? 'clear items' : 'load items'}
       </button>
     </>
-  );
-};
+  )
+}
 
-function Persons({ persons, deleteCurrent }) {
-  return (
-    <div className="people-wrapper">
-      {persons.map((person) => (
-        <Person
-          person={person}
-          key={person.id}
-          deleteCurrent={deleteCurrent}
-        />
-      ))}
-    </div>
-  );
-}
-// Person Component
-function Person({ person, deleteCurrent }) {
-  return (
-    <div className="person">
-      <h2>Name: {person.name}</h2>
-      <p>{person?.nickName && `Nick name: ${person.nickName}`}</p>
-      <button
-        className="btn"
-        onClick={() => deleteCurrent(person.id)}
-      >
-        Delete
-      </button>
-    </div>
-  );
-}
-export default UseStateArray;
+export default UseStateArray
