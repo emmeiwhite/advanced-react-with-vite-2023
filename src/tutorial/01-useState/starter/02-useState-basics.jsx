@@ -1,17 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react'
 const UseStateBasics = () => {
-  const [count, setCount] = useState(0);
-  const [score, setScore] = useState(10);
+  // state updates trigger a re-render which inturn updates the UI
 
-  const handleClick = () => {
-    setCount((prevCount) => {
-      return prevCount + 1;
-    });
-  };
+  const [count, setCount] = useState(0)
+  // useState: It returns an array with two elements. first element is a state value and second element is a function which is used to update the state
 
-  const handleScore = () => {
-    setScore((prevScore) => prevScore + 4);
-  };
+  function handleClick() {
+    setCount(prevCount => prevCount + 1)
+  }
 
   return (
     <div className="container">
@@ -22,19 +18,8 @@ const UseStateBasics = () => {
       >
         Click me
       </button>
-      <p></p>
-      <br />
-
-      <hr />
-      <h4>Score is {score}</h4>
-      <button
-        className="btn"
-        onClick={handleScore}
-      >
-        increase score by 4
-      </button>
     </div>
-  );
-};
+  )
+}
 
-export default UseStateBasics;
+export default UseStateBasics
